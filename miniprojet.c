@@ -36,8 +36,10 @@ void    setPrice(struct Book *book) {
     scanf("%lf", &book->price);
 }
 void    setQuantity(struct Book *book) {
-    printf("Enter Book quantity please: \n");
-    scanf("%d", &book->quantity);
+    do {
+        printf("Enter Book quantity please: \n");
+        scanf("%d", &book->quantity);
+    } while (book->quantity < 0);
 }
 
 void    showInfos(struct Book *book) {
