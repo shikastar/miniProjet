@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define MAX_SIZE 100
 #define MAX_BOOKS 10000
@@ -56,25 +58,44 @@ void    AddBook(struct Library *library) {
 }
 
 void    showBooksInfo(struct Library *library) {
+    printf("---------------------\n");
     printf("there is %d books.\n", library->numberOfBooks);
     for (int i = 0; i < library->numberOfBooks; i++) {
         printf("book number %d infos:\n", i);
         showInfos(&library->Books[i]);
     }
+    printf("---------------------\n");
 }
 
 void    DisplayMenu() {
-    printf("1- Add a book: \n");
-    printf("2-Show all books informations.\n");
+    printf("===============MENU=============================\n");
+    printf("1- Add a book.\n");
+    printf("2- Show all books informations.\n");
     printf("Enter an option from the menu please:\n");
 }
 
+void    checkOption(struct Library *library, int option) {
+    
+    switch (option) {
+        case 1:
+            AddBook(library);
+            break;
+        case 2 :
+        showBooksInfo(library);
+            break;
+        default :
+            printf("Enter a valid option please.\n");
+    }
+}
 
 int main() {
 
+    struct Library library;
+    library.numberOfBooks = 0;
     while (true) {
         DisplayMenu();
         int option;
         scanf("%d", &option);
+        checkOption(&library, option);
     }
 }
