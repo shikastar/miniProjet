@@ -97,18 +97,26 @@ void    changeBookQuantity(struct Library *library) {
     
     printf("Enter book title that you want to change it's quantity: \n");
     scanf("%s", title);
-    printf("Enter new book quantity: \n");
-    scanf("%d", &newQuantity);
+    do {
+        printf("Enter new book quantity: \n");
+        scanf("%d", &newQuantity);
+    } while (newQuantity < 0);
     
+    printf("---------------------\n");
     for (int i = 0; i < library->numberOfBooks; i++) {
         if (isDeleted(&library->Books[i])) continue;
         if (isSameBookName(library->Books[i].title, title)) {
             library->booksQuantity -= library->Books[i].quantity;
             library->Books[i].quantity = newQuantity;
             library->booksQuantity += library->Books[i].quantity;
-            break ;
+            printf("the new quantity of book title %s new is :%d\n", title, newQuantity);
+            printf("---------------------\n");
+            return ;
         }
     }
+
+    printf("No book with title: \'%s\' exist\n", title);
+    printf("---------------------\n");
 }
 
 void    deleteBook(struct Library *library) {
